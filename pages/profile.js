@@ -10,7 +10,7 @@ const profile = () => {
           backgroundImage: "url(/images/siom.png)",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundPosition: "top left",
+          backgroundPosition: "20%",
           height: 400,
         }}
         bodyStyle={{ padding: 0 }}
