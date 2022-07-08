@@ -2084,6 +2084,17 @@ const GlobalStyles = createGlobalStyle`
   .am-weather-cloud-2 > path, [id^=cloudy-day-] > path {
     stroke-width: 0;
   }
+
+
+
+  
+  .score-timeline-table .player-cell{
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+
+
 `;
 
 export { GlobalStyles, theme };

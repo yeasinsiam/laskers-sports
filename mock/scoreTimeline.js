@@ -4,7 +4,8 @@ const scoreTimeline = [
     _id: "asdfxcgqwaerascdfasdf",
     player: {
       image: "https://picsum.photos/200",
-      name: "Syam",
+      name: "Syam Lakser",
+      fbUrl: "https://www.facebook.com/saim.lasker",
     },
     todaysRuns: "50",
     best: "170",
@@ -16,7 +17,8 @@ const scoreTimeline = [
     _id: "sdascvzsdsferw",
     player: {
       image: "https://picsum.photos/200",
-      name: "Ashik",
+      name: "Ashik The Legendary FoXI",
+      fbUrl: "https://www.facebook.com/profile.php?id=100079079016170",
     },
     todaysRuns: "120",
     best: "300",

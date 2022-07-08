@@ -1,5 +1,5 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Table } from "antd";
+import { Avatar, Space, Table } from "antd";
 import scoreTimeline from "mock/scoreTimeline";
 import Image from "next/image";
 import qs from "qs";
@@ -36,15 +36,27 @@ const columns = [
     title: "Player",
     dataIndex: "player",
     render: (player) => (
-      <>
-        <Avatar size={40} icon={<Image src={player.image} layout="fill" />} />{" "}
-        {" " + player.name}
-      </>
+      <Space size="large" className="player-cell">
+        <Avatar
+          size={40}
+          icon={
+            <Image
+              src={player.image}
+              width={40}
+              height={40}
+              alt={player.name}
+            />
+          }
+        />
+        <a href={player.fbUrl}>{" " + player.name}</a>
+      </Space>
     ),
+    width: "30%",
   },
   {
     title: "Today's Runs",
     dataIndex: "todaysRuns",
+    sorter: (a, b) => a.todaysRuns - b.todaysRuns,
   },
   {
     title: "Best",
@@ -71,7 +83,7 @@ const ScoreTimeline = () => {
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 1,
+    pageSize: 2,
   });
 
   const handleTableChange = (newPagination, filters, sorter) => {
@@ -87,13 +99,16 @@ const ScoreTimeline = () => {
   return (
     // <div>siam</div>
     <Table
-      style={{ overflow: "scroll" }}
+      className="score-timeline-table"
       columns={columns}
       rowKey={(record) => record._id}
       dataSource={data}
       pagination={pagination}
       loading={loading}
       onChange={handleTableChange}
+      scroll={{
+        x: "100vw",
+      }}
     />
   );
 };
