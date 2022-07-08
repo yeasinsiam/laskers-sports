@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
         />
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        {/* <link rel="icon" href="/images/traingle.png" type="image/x-icon" /> */}
         <title>Dashbord - laksers sports</title>
       </Head>
       <Page>

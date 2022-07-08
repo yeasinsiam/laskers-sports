@@ -1,10 +1,10 @@
 import { Avatar, Button, Card, Menu, Row } from "antd";
+import ScoreBords from "components/sections/ScoreBords";
 import { Share } from "react-feather";
 
 const profile = () => {
   return (
     <div>
-      {" "}
       <Card
         headStyle={{
           backgroundImage: "url(/images/siom.png)",
@@ -42,6 +42,9 @@ const profile = () => {
           </Row>
         }
       />
+
+      {/* Score Metas */}
+      <ScoreBords />
     </div>
   );
 };
