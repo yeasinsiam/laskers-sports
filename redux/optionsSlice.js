@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import axios from "axios";
 
 const initialState = {
-  name: "Laksers Sports",
+  name: "Laskers Sports",
   metaTitle: "Dashbord - laskers sports",
   pageLoading: true,
   mobile: {

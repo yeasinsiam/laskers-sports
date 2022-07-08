@@ -9,6 +9,8 @@ import {
   Triangle,
   Users,
   X,
+  Settings,
+  User,
 } from "react-feather";
 import Inner from "components/styles/Sidebar";
 import DashHeader from "./styles/Header";
@@ -43,6 +45,21 @@ const SidebarMenu = ({ router }) => {
       icon: <Users size={20} strokeWidth={1} />,
       label: "Players",
       onClick: () => router.push("/players"),
+    },
+
+    {
+      // for admin user
+      key: "settings",
+      icon: <Settings size={20} strokeWidth={1} />,
+      label: "Settings",
+      children: [
+        {
+          key: "settings-profile",
+          icon: <User size={20} strokeWidth={1} />,
+          label: "Profile",
+          onClick: () => router.push("/profile"),
+        },
+      ],
     },
   ];
 

@@ -4,9 +4,11 @@ function activeMenuItem(url) {
   let defaultOpenKeys = [],
     defaultSelectedKeys = ["/"];
 
-  if (arr[1] === "players") {
-    defaultOpenKeys = [];
-    defaultSelectedKeys = ["players"];
+  console.log(arr);
+
+  if (arr[1] === "profile") {
+    defaultOpenKeys = ["settings"];
+    defaultSelectedKeys = ["settings-profile"];
   }
 
   // products

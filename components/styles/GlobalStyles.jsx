@@ -2019,7 +2019,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .header-notifications{
-     background-color: ${theme.backgroundColor} !important;
+     background-color: ${theme.layoutHeaderBackground} !important;
   }
 
   .header-notifications .ant-spin-container {
