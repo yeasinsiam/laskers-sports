@@ -1,6 +1,6 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Space, Table } from "antd";
-import scoreTimeline from "mock/scoreTimeline";
+import listPlayers from "mock/listPlayers";
 import Image from "next/image";
 import qs from "qs";
 import React, { useEffect, useState } from "react";
@@ -11,8 +11,8 @@ const getRandomuserParams = (params) => ({
   ...params,
 });
 
-const ScoreTimeline = () => {
-  const [data, setData] = useState(scoreTimeline);
+const ListPlayers = () => {
+  const [data, setData] = useState(listPlayers);
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState({
     current: 1,
@@ -20,36 +20,15 @@ const ScoreTimeline = () => {
   });
 
   const columns = [
-    //   {
-    //     title: "Name",
-    //     dataIndex: "name",
-    //     sorter: true,
-    //     render: (name) => `${name.first} ${name.last}`,
-    //     width: "20%",
-    //   },
-    //   {
-    //     title: "Gender",
-    //     dataIndex: "gender",
-    //     filters: [
-    //       {
-    //         text: "Male",
-    //         value: "male",
-    //       },
-    //       {
-    //         text: "Female",
-    //         value: "female",
-    //       },
-    //     ],
-    //     width: "20%",
-    //   },
     {
       title: "Sl No.",
       dataIndex: "slNo",
+      width: "10%",
     },
     {
       title: "Player",
       dataIndex: "player",
-      render: (player) => (
+      render: (_, player) => (
         <Space size="large" className="player-cell">
           <Avatar
             size={40}
@@ -65,31 +44,6 @@ const ScoreTimeline = () => {
           <a href={player.fbUrl}>{" " + player.name}</a>
         </Space>
       ),
-      width: "30%",
-    },
-    {
-      title: "Today's Runs",
-      dataIndex: "todaysRuns",
-      sorter: (a, b) => a.todaysRuns - b.todaysRuns,
-    },
-    {
-      title: "Best",
-      dataIndex: "best",
-      sorter: (a, b) => {
-        // console.log("siam");
-
-        return a.best - b.best;
-      },
-    },
-    {
-      title: "Total Runs",
-      dataIndex: "totalRuns",
-      sorter: (a, b) => a.totalRuns - b.totalRuns,
-    },
-    {
-      title: "Total Wickets",
-      dataIndex: "totalWickets",
-      sorter: (a, b) => a.totalWickets - b.totalWickets,
     },
   ];
 
@@ -120,4 +74,4 @@ const ScoreTimeline = () => {
   );
 };
 
-export default ScoreTimeline;
+export default ListPlayers;

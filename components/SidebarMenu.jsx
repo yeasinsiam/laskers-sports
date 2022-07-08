@@ -7,6 +7,7 @@ import {
   LogOut,
   ShoppingBag,
   Triangle,
+  Users,
   X,
 } from "react-feather";
 import Inner from "components/styles/Sidebar";
@@ -36,6 +37,12 @@ const SidebarMenu = ({ router }) => {
       icon: <Layers size={20} strokeWidth={1} />,
       label: "Dashbord",
       onClick: () => router.push("/"),
+    },
+    {
+      key: "players",
+      icon: <Users size={20} strokeWidth={1} />,
+      label: "Players",
+      onClick: () => router.push("/players"),
     },
   ];
 
