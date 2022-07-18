@@ -2094,6 +2094,11 @@ const GlobalStyles = createGlobalStyle`
   }
 
 
+  .trash-icon{
+    color: ${theme.highlightColor};
+    cursor: pointer;
+  }
+
 
 `;
 

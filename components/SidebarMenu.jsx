@@ -19,6 +19,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { setMobileDrawer } from "redux/optionsSlice";
 import { activeMenuItem } from "helpers/helperFunction";
+import { useState } from "react";
 
 const { Sider, Header } = Layout;
 
@@ -29,7 +30,6 @@ const SidebarMenu = ({ router }) => {
   // state
   const {
     mobile: { isMobileDevice, isMobileDrawer },
-    activeMenu,
     name,
   } = useSelector((state) => state.options);
 
@@ -38,13 +38,29 @@ const SidebarMenu = ({ router }) => {
       key: "/",
       icon: <Layers size={20} strokeWidth={1} />,
       label: "Dashbord",
-      onClick: () => router.push("/"),
+      onClick: () => {
+        router.push("/");
+        dispatch(setMobileDrawer(false));
+      },
     },
     {
       key: "players",
       icon: <Users size={20} strokeWidth={1} />,
       label: "Players",
-      onClick: () => router.push("/players"),
+      onClick: () => {
+        router.push("/players");
+        dispatch(setMobileDrawer(false));
+      },
+    },
+
+    {
+      key: "profile",
+      icon: <User size={20} strokeWidth={1} />,
+      label: "Profile",
+      onClick: () => {
+        router.push("/profile");
+        dispatch(setMobileDrawer(false));
+      },
     },
 
     {
@@ -52,14 +68,10 @@ const SidebarMenu = ({ router }) => {
       key: "settings",
       icon: <Settings size={20} strokeWidth={1} />,
       label: "Settings",
-      children: [
-        {
-          key: "settings-profile",
-          icon: <User size={20} strokeWidth={1} />,
-          label: "Profile",
-          onClick: () => router.push("/profile"),
-        },
-      ],
+      onClick: () => {
+        router.push("/settings");
+        dispatch(setMobileDrawer(false));
+      },
     },
   ];
 
@@ -128,7 +140,10 @@ const SidebarMenu = ({ router }) => {
             <DashHeader>
               <Header>
                 <Link href="/">
-                  <a className="brand">
+                  <a
+                    className="brand"
+                    onClick={() => dispatch(setMobileDrawer(false))}
+                  >
                     <Triangle size={24} strokeWidth={1} />
                     <strong
                       className="mx-1"

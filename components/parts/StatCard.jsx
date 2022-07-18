@@ -1,7 +1,5 @@
 import { Button, Card, Col, Row } from "antd";
 
-import PropTypes from "prop-types";
-
 const StatCard = ({ type, title, value, icon, color, clickHandler }) => {
   let before = null,
     after = null;
@@ -45,14 +43,6 @@ const StatCard = ({ type, title, value, icon, color, clickHandler }) => {
       </Row>
     </Card>
   );
-};
-
-StatCard.propTypes = {
-  type: PropTypes.oneOf(["fill"]),
-  title: PropTypes.string,
-  value: PropTypes.number,
-  icon: PropTypes.element,
-  color: PropTypes.string,
 };
 
 export default StatCard;

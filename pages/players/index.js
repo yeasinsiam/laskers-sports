@@ -1,5 +1,6 @@
 import { Card, Divider } from "antd";
-import ListPlayers from "components/sections/ListPlayers";
+import ScoreTimeline from "components/sections/ScoreTimeline";
+// import ListPlayers from "components/sections/ListPlayers";
 
 const Players = () => {
   return (
@@ -8,7 +9,8 @@ const Players = () => {
         <small>All Players</small>
       </Divider>
       <div className="p-4">
-        <ListPlayers />
+        {/* <ListPlayers /> */}
+        <ScoreTimeline />
       </div>
     </Card>
   );

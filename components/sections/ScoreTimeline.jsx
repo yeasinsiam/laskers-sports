@@ -2,119 +2,120 @@ import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Space, Table } from "antd";
 import scoreTimeline from "mock/scoreTimeline";
 import Image from "next/image";
-import qs from "qs";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
-const getRandomuserParams = (params) => ({
-  results: params.pagination?.pageSize,
-  page: params.pagination?.current,
-  ...params,
-});
+import { useDispatch, useSelector } from "react-redux";
+import { syncUsers } from "redux/usersSlice";
 
 const ScoreTimeline = () => {
-  const [data, setData] = useState(scoreTimeline);
-  const [loading, setLoading] = useState(false);
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 2,
-  });
+  const dispatch = useDispatch();
+  //state
+  const { allUsers } = useSelector((state) => state.users);
+  const [filteredPlayerData, setFilteredPlayerData] = useState([]);
 
   const columns = [
-    //   {
-    //     title: "Name",
-    //     dataIndex: "name",
-    //     sorter: true,
-    //     render: (name) => `${name.first} ${name.last}`,
-    //     width: "20%",
-    //   },
-    //   {
-    //     title: "Gender",
-    //     dataIndex: "gender",
-    //     filters: [
-    //       {
-    //         text: "Male",
-    //         value: "male",
-    //       },
-    //       {
-    //         text: "Female",
-    //         value: "female",
-    //       },
-    //     ],
-    //     width: "20%",
-    //   },
     {
       title: "Sl No.",
-      dataIndex: "slNo",
+      render: (_, player, index) => index + 1,
+      width: "15%",
     },
     {
       title: "Player",
       dataIndex: "player",
-      render: (player) => (
+      render: (_, player) => (
         <Space size="large" className="player-cell">
           <Avatar
             size={40}
             icon={
               <Image
-                src={player.image}
+                src={player.images.avatar}
                 width={40}
                 height={40}
                 alt={player.name}
               />
             }
           />
-          <a href={player.fbUrl}>{" " + player.name}</a>
+          <Link href={`/players/${player.slug}`}>
+            <a>{" " + player.name}</a>
+          </Link>
         </Space>
       ),
       width: "30%",
     },
     {
-      title: "Today's Runs",
-      dataIndex: "todaysRuns",
-      sorter: (a, b) => a.todaysRuns - b.todaysRuns,
+      title: "Recent Runs",
+      dataIndex: "recentRuns",
+      render: (_, timeline) =>
+        timeline.scoreTimelines.length
+          ? timeline.scoreTimelines[0].score.runs
+          : "-",
+      sorter: (a, b) =>
+        a.scoreTimelines.length ??
+        a.scoreTimelines[0].score.runs - b.scoreTimelines[0].score.runs,
+
+      defaultSortOrder: "descend",
     },
     {
       title: "Best",
-      dataIndex: "best",
-      sorter: (a, b) => {
-        // console.log("siam");
-
-        return a.best - b.best;
-      },
+      dataIndex: "bestRuns",
+      render: (_, timeline) => (timeline.bestRuns ? timeline.bestRuns : "-"),
+      sorter: (a, b) => a.bestRuns - b.bestRuns,
     },
     {
       title: "Total Runs",
-      dataIndex: "totalRuns",
-      sorter: (a, b) => a.totalRuns - b.totalRuns,
+      dataIndex: "totalScoreRuns",
+      sorter: (a, b) => a.totalScoreRuns - b.totalScoreRuns,
     },
     {
       title: "Total Wickets",
-      dataIndex: "totalWickets",
-      sorter: (a, b) => a.totalWickets - b.totalWickets,
+      dataIndex: "totalScoreWickets",
+      sorter: (a, b) => a.totalScoreWickets - b.totalScoreWickets,
     },
   ];
 
-  const handleTableChange = (newPagination, filters, sorter) => {
-    console.log(newPagination, filters, sorter);
-    // fetchData({
-    //   sortField: sorter.field,
-    //   sortOrder: sorter.order,
-    //   pagination: newPagination,
-    //   ...filters,
-    // });
-  };
+  // const handleTableChange = (newPagination, filters, sorter) => {
+  //   console.log(newPagination, filters, sorter);
+  // };
+
+  useEffect(() => {
+    dispatch(syncUsers(true));
+  }, []); //eslint-disable-line
+
+  useEffect(() => {
+    if (allUsers.users.length) {
+      setFilteredPlayerData(
+        allUsers.users.reduce((acc, user) => {
+          const isPlayerUser = user.roles.findIndex(
+            (role) => role === "player"
+          );
+          if (isPlayerUser !== -1) {
+            acc.push(user);
+          }
+
+          return acc;
+        }, [])
+      );
+    } else {
+      setFilteredPlayerData([]);
+    }
+  }, [allUsers.users]);
+  console.log(filteredPlayerData);
 
   return (
     // <div>siam</div>
     <Table
+      key="score-timeline-table"
       className="score-timeline-table"
       columns={columns}
       rowKey={(record) => record._id}
-      dataSource={data}
-      pagination={pagination}
-      loading={loading}
-      onChange={handleTableChange}
+      dataSource={filteredPlayerData}
+      loading={allUsers.loading}
+      // onChange={handleTableChange}
       scroll={{
         x: "78vw",
+      }}
+      pagination={{
+        position: ["none", "none"],
       }}
     />
   );

@@ -1,21 +1,21 @@
-import { faAngry } from "@fortawesome/free-regular-svg-icons";
-import { faBaseball } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row } from "antd";
 import StatCard from "components/parts/StatCard";
 import { theme } from "components/styles/GlobalStyles";
-import Image from "next/image";
-import { Bell, Bookmark, MessageCircle, PhoneCall } from "react-feather";
+import { Bookmark } from "react-feather";
 import SportsBaseballOutlinedIcon from "@mui/icons-material/SportsBaseballOutlined";
+import SportsCricketOutlinedIcon from "@mui/icons-material/SportsCricketOutlined";
+import { useSelector } from "react-redux";
 
 const ScoreBords = () => {
+  const { user } = useSelector((state) => state.users.currentUser);
+
   return (
     <Row gutter={16}>
       <Col xs={24} sm={12} md={8}>
         <StatCard
           type="fill"
           title="Best"
-          value={103}
+          value={`${user.bestRuns ? user.bestRuns : 0} (Runs)`}
           icon={<Bookmark size={20} strokeWidth={1} />}
           color={theme.primaryColor}
           clickHandler={() => Message.info("Campaign stat button clicked")}
@@ -26,8 +26,8 @@ const ScoreBords = () => {
         <StatCard
           type="fill"
           title="Total Runs"
-          value={323}
-          icon={<Bell size={20} strokeWidth={1} />}
+          value={user.totalScoreRuns}
+          icon={<SportsCricketOutlinedIcon />}
           color={theme.warningColor}
           clickHandler={() => Message.info("Queries stat button clicked")}
         />
@@ -36,18 +36,10 @@ const ScoreBords = () => {
         <StatCard
           type="fill"
           title="Wickets"
-          value={24}
+          value={user.totalScoreWickets}
           icon={
             <>
-              {/* <FontAwesomeIcon icon="fa-regular fa-tennis-ball" /> */}
-              {/* <FontAwesomeIcon icon={["fa", "tennis-ball"]} /> */}
-              {/* <FontAwesomeIcon icon={faBaseball} /> */}
               <SportsBaseballOutlinedIcon />
-              {/* <FontAwesomeIcon icon="fa-solid fa-tennis-ball" /> */}
-              {/* <FontAwesomeIcon icon="coffee" /> */}
-              {/* <FontAwesomeIcon icon={["far", "coffee"]} /> */}
-              {/* <MessageCircle size={20} strokeWidth={1} />
-              <MessageCircle size={20} strokeWidth={1} /> */}
             </>
           }
           color={theme.errorColor}

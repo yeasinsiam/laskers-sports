@@ -4,4 +4,12 @@ import {
   setMobileDrawer,
 } from "./optionsSlice";
 
-export { setInitialPageLoading, setIsMobileDevice, setMobileDrawer };
+import { showUserDeleteModal, handleUserDeleteCancel } from "./usersSlice";
+
+export {
+  setInitialPageLoading,
+  setIsMobileDevice,
+  setMobileDrawer,
+  showUserDeleteModal,
+  handleUserDeleteCancel,
+};

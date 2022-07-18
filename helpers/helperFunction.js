@@ -4,33 +4,20 @@ function activeMenuItem(url) {
   let defaultOpenKeys = [],
     defaultSelectedKeys = ["/"];
 
-  console.log(arr);
+  // console.log(arr);
 
-  if (arr[1] === "profile") {
-    defaultOpenKeys = ["settings"];
-    defaultSelectedKeys = ["settings-profile"];
+  if (arr[1] === "players") {
+    defaultOpenKeys = [""];
+    defaultSelectedKeys = ["players"];
   }
-
-  // products
-  // if (arr[1] === "products") {
-  //   defaultOpenKeys = ["products"];
-  //   defaultSelectedKeys = ["all-products"];
-  // }
-  // if (arr[1] === "products" && arr[2] === "add-product") {
-  //   defaultOpenKeys = ["products"];
-  //   defaultSelectedKeys = ["add-product"];
-  // }
-  // types
-
-  // if (arr[1] === "products" && arr[2] === "types") {
-  //   defaultOpenKeys = ["products", "products-types"];
-  //   defaultSelectedKeys = ["all-products-types"];
-  // }
-
-  // if (arr[1] === "products" && arr[2] === "types" && arr[3] === "add-type") {
-  //   defaultOpenKeys = ["products", "products-types"];
-  //   defaultSelectedKeys = ["add-products-types"];
-  // }
+  if (arr[1] === "profile") {
+    defaultOpenKeys = [""];
+    defaultSelectedKeys = ["profile"];
+  }
+  if (arr[1] === "settings") {
+    defaultOpenKeys = [""];
+    defaultSelectedKeys = ["settings"];
+  }
 
   // // images
   // if (arr[1] === "images") {
@@ -47,4 +34,17 @@ function activeMenuItem(url) {
     defaultSelectedKeys,
   };
 }
-export { activeMenuItem };
+
+const formatDate = (date) => {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [day, month, year].join("/");
+};
+
+export { activeMenuItem, formatDate };
